@@ -22,8 +22,13 @@
       </div>
 
       <div class="links">
-        <a href="https://github.com/aldok10/pretest-prospark"
-          >github.com/aldok10/pretest-prospark</a
+        <a href="https://github.com/aldok10/prospark_fe"
+          >github.com/aldok10/prospark_fe</a
+        >
+      </div>
+      <div class="links">
+        <a href="https://github.com/aldok10/prospark_be"
+          >github.com/aldok10/prospark_be</a
         >
       </div>
     </div>
