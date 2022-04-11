@@ -41,7 +41,7 @@
                   <th width="175px">{{ $t("actions") }}</th>
                 </tr>
               </thead>
-              <tbody v-if="products.length != 0 && isLoading == false">
+              <tbody v-if="products.data.length != 0 && isLoading == false">
                 <tr v-for="(product, index) in products.data" :key="product.id">
                   <td>{{ index + 1 + (page - 1) * limit }}</td>
                   <td>{{ product.name }}</td>
