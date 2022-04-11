@@ -147,7 +147,7 @@ export default {
       }
     },
     redirect() {
-      this.$router.push({ name: "products" });
+      this.$router.push({ name: "products.index" });
     },
   },
 };

@@ -41,7 +41,23 @@
                   <th width="175px">{{ $t("actions") }}</th>
                 </tr>
               </thead>
-              <tbody v-if="products.data.length != 0 && isLoading == false">
+              <tbody v-if="isLoading">
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">{{ $t("loading") }}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody v-else-if="isNoData && isLoading == false">
+                <tr>
+                  <td colspan="6" class="text-center">
+                    {{ $t("product_not_found") }}
+                  </td>
+                </tr>
+              </tbody>
+              <tbody v-else>
                 <tr v-for="(product, index) in products.data" :key="product.id">
                   <td>{{ index + 1 + (page - 1) * limit }}</td>
                   <td>{{ product.name }}</td>
@@ -66,22 +82,6 @@
                       <fa icon="trash" fixed-width />
                       {{ $t("delete") }}
                     </button>
-                  </td>
-                </tr>
-              </tbody>
-              <tbody v-else-if="isLoading">
-                <tr>
-                  <td colspan="6" class="text-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only">{{ $t("loading") }}</span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-              <tbody v-else>
-                <tr>
-                  <td colspan="6" class="text-center">
-                    {{ $t("product_not_found") }}
                   </td>
                 </tr>
               </tbody>
@@ -119,6 +119,7 @@ export default {
       products: {},
       page: 1,
       limit: 5,
+      isNoData: true,
       isLoading: false,
     };
   },
@@ -135,6 +136,7 @@ export default {
         .get(`api/product?page=${page}&per_page=${this.limit}`)
         .then((response) => {
           this.products = response.data;
+          this.isNoData = !this.products.data.length;
         })
         .then(() => {
           this.isLoading = false;
